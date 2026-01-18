@@ -10,7 +10,7 @@ except FileNotFoundError:
     st.stop()
 
 
-st.title("生徒現状報告書ジェネレーター")
+st.title("生徒現状報告書ジェネレーターー")
 
 
 st.markdown("---")
