@@ -10,7 +10,7 @@ except FileNotFoundError:
     st.stop()
 
 
-st.title("生徒現状報告書ジェネレーターー")
+st.title("生徒現状報告書ジェネレーター")
 
 
 st.markdown("---")
@@ -346,7 +346,7 @@ if button_situation_and_plan:
                 st.text_area("", generated_text1[4], height=170, label_visibility="collapsed")
                 st_copy_to_clipboard(generated_text1[4], before_copy_label="コピーする", after_copy_label="コピー完了！")
 
-                st.text_area("デバッグ用プロンプト確認", f"--- システムプロンプト ---\n{sys_msg}\n\n--- ユーザープロンプト ---\n{usr_msg}", height=2500)
+                # st.text_area("デバッグ用プロンプト確認", f"--- システムプロンプト ---\n{sys_msg}\n\n--- ユーザープロンプト ---\n{usr_msg}", height=2500)
                 
             except Exception as e:
                 st.error(f"エラーが発生しました: {e}")
