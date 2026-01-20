@@ -41,7 +41,7 @@ ui_whether_attended_course = st.checkbox(f"直近の{latest_course}を受講し�
 
 if ui_whether_attended_course:
     st.subheader("直近の講習の振り返り")
-    ui_units_learned_in_the_course = st.text_input(f"{latest_course}で重点的に学習した単元・課題", placeholder="例：一次関数")
+    ui_units_learned_in_the_course = st.text_input(f"{latest_course}で重点的に学習した単元・課題", placeholder="例：【一次関数】【相似】")
 else:
     st.subheader("最近の通常授業の振り返り")
     start_learning_season = {
@@ -49,7 +49,7 @@ else:
         "11月": "7月",
         "2月": "12月",
     }[season]
-    ui_units_learned_in_the_course = st.text_input(f"{start_learning_season}からの通常授業で重点的に学習した単元・課題", placeholder="例：一次関数")
+    ui_units_learned_in_the_course = st.text_input(f"{start_learning_season}からの通常授業で重点的に学習した単元・課題", placeholder="例：【一次関数】【相似】")
 
 ui_before_growth_in_the_course = st.text_input("その単元・課題のはじめの状況", placeholder="例：関数の基礎があいまい")
 
@@ -58,7 +58,7 @@ ui_after_growth_in_the_course = st.text_input("その単元・課題の終わり
 ui_units_developing = st.text_input("改善されたが完全に定着はしていない単元・課題（ある場合）", placeholder="例：図形の証明")
 
 
-st.subheader("克服課題")
+st.subheader("その他の克服課題")
 
 ui_overcome1, ui_overcome1_comprehension, ui_overcome1_proficiency, ui_overcome1_place = st.columns(4)
 with ui_overcome1:
@@ -68,7 +68,7 @@ with ui_overcome1_comprehension:
 with ui_overcome1_proficiency:
     overcome1_proficiency = st.text_input("克服単元1の定着度", placeholder="例：80%")
 with ui_overcome1_place:
-    overcome1_place = st.selectbox("今後どこで取り組むか", ["通常授業", "〇〇講習", "家庭学習"], placeholder="例：家庭学習")
+    overcome1_place = st.selectbox("今後どこで取り組むか", ["通常授業", "◆◆講習", "家庭学習"], placeholder="例：家庭学習")
 
 
 ui_overcome2, ui_overcome2_comprehension, ui_overcome2_proficiency, ui_overcome2_place = st.columns(4)
@@ -79,7 +79,7 @@ with ui_overcome2_comprehension:
 with ui_overcome2_proficiency:
     overcome2_proficiency = st.text_input("克服単元2の定着度", placeholder="例：75%")
 with ui_overcome2_place:
-    overcome2_place = st.selectbox("今後どこで取り組むか", ["通常授業", "〇〇講習", "家庭学習"], placeholder="例：通常授業")
+    overcome2_place = st.selectbox("今後どこで取り組むか", ["通常授業", "◆◆講習", "家庭学習"], placeholder="例：通常授業")
 
 
 st.subheader("学ぶチカラ")
@@ -93,7 +93,7 @@ power_of_learning = {
         "国語": {"漢字・語いを◆%⇒◆%覚えきる": ["◆%⇒◆%に基準を上げる"]},
     }[subject],
     "集中力について": {
-        # "授業中の集中力を30分⇒45分に伸ばす": "",
+        "授業中の集中力を30分⇒45分に伸ばす": ["授業前に5分間睡眠をとる", "タイマーを活用する"],
         "家庭学習の集中力を高める": ["やり終えたら好きなことをする", "学習時間を決める"],
     },
     "本番力について": {
@@ -120,27 +120,19 @@ power_of_learning = {
 
 st.markdown("**学ぶチカラA**")
 power_of_learning_category1 = power_of_learning_issue1 = power_of_learning_plan1 = None
-ui_power_of_learning_category1, ui_power_of_learning_issue1, ui_power_of_learning_plan1 = st.columns(3)
-with ui_power_of_learning_category1:
-    power_of_learning_category1 = st.selectbox("カテゴリー", list(power_of_learning.keys()), key="category1", index=None, placeholder="選択してください")
-with ui_power_of_learning_issue1:
-    if power_of_learning_category1:
-        power_of_learning_issue1 = st.selectbox("課題", list(power_of_learning[power_of_learning_category1].keys()), key="issue1", index=None, placeholder="選択してください")
-with ui_power_of_learning_plan1:
-    if power_of_learning_category1 and power_of_learning_issue1:
-        power_of_learning_plan1 = st.selectbox("指導案", power_of_learning[power_of_learning_category1][power_of_learning_issue1], key="plan1", index=None, placeholder="選択してください")
+power_of_learning_category1 = st.selectbox("カテゴリー", list(power_of_learning.keys()), key="category1", index=None, placeholder="選択してください")
+if power_of_learning_category1:
+    power_of_learning_issue1 = st.selectbox("課題", list(power_of_learning[power_of_learning_category1].keys()), key="issue1", index=None, placeholder="選択してください")
+if power_of_learning_category1 and power_of_learning_issue1:
+    power_of_learning_plan1 = st.selectbox("指導案", power_of_learning[power_of_learning_category1][power_of_learning_issue1], key="plan1", index=None, placeholder="選択してください")
 
 st.markdown("**学ぶチカラB（任意）**")
 power_of_learning_category2 = power_of_learning_issue2 = power_of_learning_plan2 = None
-ui_power_of_learning_category2, ui_power_of_learning_issue2, ui_power_of_learning_plan2 = st.columns(3)
-with ui_power_of_learning_category2:
-    power_of_learning_category2 = st.selectbox("カテゴリー", list(power_of_learning.keys()), key="category2", index=None, placeholder="選択してください（任意）")
-with ui_power_of_learning_issue2:
-    if power_of_learning_category2:
-        power_of_learning_issue2 = st.selectbox("課題", list(power_of_learning[power_of_learning_category2].keys()), key="issue2", index=None, placeholder="選択してください")
-with ui_power_of_learning_plan2:
-    if power_of_learning_category2 and power_of_learning_issue2:
-        power_of_learning_plan2 = st.selectbox("指導案", power_of_learning[power_of_learning_category2][power_of_learning_issue2], key="plan2", index=None, placeholder="選択してください")
+power_of_learning_category2 = st.selectbox("カテゴリー", list(power_of_learning.keys()), key="category2", index=None, placeholder="選択してください（任意）")
+if power_of_learning_category2:
+    power_of_learning_issue2 = st.selectbox("課題", list(power_of_learning[power_of_learning_category2].keys()), key="issue2", index=None, placeholder="選択してください")
+if power_of_learning_category2 and power_of_learning_issue2:
+    power_of_learning_plan2 = st.selectbox("指導案", power_of_learning[power_of_learning_category2][power_of_learning_issue2], key="plan2", index=None, placeholder="選択してください")
 
 
 st.subheader("進度状況とスケジュール")
@@ -164,7 +156,7 @@ with ui_schedule_end_curriculum:
 
 ui_next_phase, ui_next_phase_teaching_material = st.columns(2)
 with ui_next_phase:
-    next_phase = st.text_input("今後の方針（任意）", placeholder="例：入試対策、過去問演習、学校の予習")
+    next_phase = st.text_input("その後の方針（任意）", placeholder="例：入試対策、過去問演習、学校の予習")
 with ui_next_phase_teaching_material:
     next_phase_teaching_material = st.text_input("使用予定の教材（ある場合）", placeholder="例：入試過去問")
 
@@ -188,8 +180,8 @@ def generate_situation_and_plan():
     pol_b_text = "なし"
     if power_of_learning_category2 and power_of_learning_issue2 and power_of_learning_plan2:
         pol_b_text = f"""
-        - 課題: {power_of_learning_issue2}
-        - 指導案: {power_of_learning_plan2}
+        - 【学ぶチカラ課題2】: {power_of_learning_issue2}
+        - 【学ぶチカラ指導案2】: {power_of_learning_plan2}
         """
 
     # システムプロンプト：役割とテンプレート定義
@@ -257,8 +249,8 @@ def generate_situation_and_plan():
 
 # 3. 学ぶチカラ（以下の文言をそのまま使用すること）
 - A（必須）:
-    課題: {power_of_learning_issue1}
-    指導案: {power_of_learning_plan1}
+    【学ぶチカラ課題1】: {power_of_learning_issue1}
+    【学ぶチカラ指導案1】: {power_of_learning_plan1}
 - B（任意）: {pol_b_text}
 
 # 4. 進度・スケジュール
@@ -287,12 +279,8 @@ if button_situation_and_plan:
         (ui_before_growth_in_the_course, "はじめの状況"),
         (ui_after_growth_in_the_course, "終わりの状況"),
         (overcome1, "克服単元1"),
-        (overcome1_comprehension, "克服単元1の理解度"),
-        (overcome1_proficiency, "克服単元1の定着度"),
         (overcome1_place, "克服単元1の指導場所"),
         (overcome2, "克服単元2"),
-        (overcome2_comprehension, "克服単元2の理解度"),
-        (overcome2_proficiency, "克服単元2の定着度"),
         (overcome2_place, "克服単元2の指導場所"),
         (power_of_learning_category1, "学ぶチカラAのカテゴリー"),
         (power_of_learning_issue1, "学ぶチカラAの課題"),
@@ -301,6 +289,11 @@ if button_situation_and_plan:
         (schedule_end_date, "カリキュラム終了予定時期"),
         (schedule_end_curriculum, "カリキュラム終了予定内容"),
     ]
+    if (power_of_learning_category2):
+        required_fields.extend([
+            (power_of_learning_issue2, "学ぶチカラBの課題"),
+            (power_of_learning_plan2, "学ぶチカラBの指導案"),
+        ])
     
     # 未入力の項目を探す
     missing_items = [label for value, label in required_fields if not value]
@@ -422,6 +415,6 @@ if button_message:
                 st.markdown("### 生成されたメッセージ")
                 st.text_area("", result, height=400, label_visibility="collapsed")
                 st_copy_to_clipboard(result, before_copy_label="コピーする", after_copy_label="コピー完了！")
-
+            
             except Exception as e:
                 st.error(f"エラー: {e}")
