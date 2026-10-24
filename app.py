@@ -154,11 +154,21 @@ st.subheader("現在の進度")
 st.subheader("進度状況とスケジュール")
 ui_class_status, ui_class_progress = st.columns(2)
 with ui_class_status:
-    class_status = st.selectbox("現在のユニワンでの進度", ["学校の予習", "学校の復習", "学校の進度に沿って", "受験対策", "英検◆級対策", "◆◆対策"])
+    class_status = st.selectbox(
+        "現在のユニワンでの進度",        (class_progress, "授業の進み具合"),
+        ["学校の予習", "学校の復習", "学校の進度に沿って", "受験対策", "英検◆級対策", "◆◆対策"],
+        index=None,
+        placeholder="選択してください",
+    )
 with ui_class_progress:
-    class_progress = st.selectbox("授業の進み具合", ["概ね順調", "やや遅れている"])
+    class_progress = st.selectbox(
+        "授業の進み具合",
+        ["概ね順調", "やや遅れている"],
+        index=None,
+        placeholder="選択してください",
+    )
 
-if (class_progress == "やや遅れている"):
+if class_progress == "やや遅れている":
     ui_reason_for_delay = st.text_input("遅れの理由", placeholder="例：学校行事が多かったため")
 else:
     ui_reason_for_delay = "特になし"
@@ -170,16 +180,27 @@ next_class_month = {
     "11月": "12月",
     "2月": "3月",
 }[season]
-ui_next_phase = st.selectbox(f"{next_class_month}以降の通常授業", ["学校の予習", "◆◆対策"])
+ui_next_phase = st.selectbox(
+    f"{next_class_month}以降の通常授業",
+    ["学校の予習", "◆◆対策"],
+    index=None,
+    placeholder="選択してください",
+)
 
 st.text("カリキュラム終了予定時期")
 ui_schedule_end_date, ui_schedule_end_curriculum = st.columns(2)
 with ui_schedule_end_date:
     schedule_end_date = st.text_input("いつまでに", placeholder="例：12月末～1月上旬")
 with ui_schedule_end_curriculum:
-    schedule_end_curriculum = st.selectbox("どこまで終わるか", [f"{grade}の内容", "英検◆級対策", "◆◆対策", "◆単元名◆"])
+    schedule_end_curriculum = st.selectbox(
+        "どこまで終わるか",
+        [f"{grade}の内容", "英検◆級対策", "◆◆対策", "◆単元名◆"],
+        index=None,
+        placeholder="選択してください",
+    )
 
 ui_next_phase_teaching_material = st.text_input("使用予定の教材（任意）", placeholder="例：入試過去問")
+
 
 current_grade_nensei = {"小1": "小学1年生", "小2": "小学2年生", "小3": "小学3年生", "小4": "小学4年生", "小5": "小学5年生", "小6": "小学6年生", "中1": "中学1年生", "中2": "中学2年生", "中3": "中学3年生", "高1": "高校1年生", "高2": "高校2年生", "高3": "高校3年生"}
 target_states = {
