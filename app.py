@@ -155,7 +155,7 @@ st.subheader("進度状況とスケジュール")
 ui_class_status, ui_class_progress = st.columns(2)
 with ui_class_status:
     class_status = st.selectbox(
-        "現在のユニワンでの進度",        (class_progress, "授業の進み具合"),
+        "現在のユニワンでの進度",
         ["学校の予習", "学校の復習", "学校の進度に沿って", "受験対策", "英検◆級対策", "◆◆対策"],
         index=None,
         placeholder="選択してください",
@@ -200,7 +200,6 @@ with ui_schedule_end_curriculum:
     )
 
 ui_next_phase_teaching_material = st.text_input("使用予定の教材（任意）", placeholder="例：入試過去問")
-
 
 current_grade_nensei = {"小1": "小学1年生", "小2": "小学2年生", "小3": "小学3年生", "小4": "小学4年生", "小5": "小学5年生", "小6": "小学6年生", "中1": "中学1年生", "中2": "中学2年生", "中3": "中学3年生", "高1": "高校1年生", "高2": "高校2年生", "高3": "高校3年生"}
 target_states = {
@@ -342,6 +341,7 @@ if button_situation_and_plan:
         (power_of_learning_issue1, "学ぶチカラAの課題"),
         (power_of_learning_plan1, "学ぶチカラAの指導案"),
         (class_status, "現在のユニワンでの進度"),
+        (class_progress, "授業の進み具合"),
         (schedule_end_date, "カリキュラム終了予定時期"),
         (schedule_end_curriculum, "カリキュラム終了予定内容"),
         (ui_next_phase, "今後のスケジュール"),
